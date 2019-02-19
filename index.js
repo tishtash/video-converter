@@ -1,6 +1,6 @@
 const ffmpeg = require('fluent-ffmpeg');
-const firstVideo = './vid/sample.Avi';
-const secondVideo = './vid/sample1.Avi';
+const firstVideo = './videos/sample.Avi';
+const secondVideo = './videos/sample1.Avi';
 
 const watermarkAddition = require('./addWaterMark');
 
