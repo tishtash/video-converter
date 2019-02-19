@@ -9,6 +9,7 @@ let end;
 
 new ffmpeg(firstVideo)
     .input(secondVideo)
+    .addOptions(['-c:v h264', '-preset:v ultrafast'])
     .on('start', (command) => {
         start = new Date();
         console.log('\x1b[34m', 'Executing FFMPEG command.....', command);
@@ -23,6 +24,7 @@ new ffmpeg(firstVideo)
     .on('progress', (progress) => {
         console.log('\x1b[32m', '\nProcessing: ' + progress.targetSize + ' KB converted');
         console.log('\x1b[32m', '\nPercentage complete: ' + Math.round(progress.percent) + ' %');
+        console.log('\x1b[32m', 'Processing timemark: ' + progress.timemark);
     })
     .on('error', (err) => {
         console.error('\x1b[31m', '\Error occured: ', err);

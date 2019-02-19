@@ -8,6 +8,7 @@ module.exports.init = function() {
     new ffmpeg()
         .input('./videos/temp.mp4')
         .input('./watermark/logo.png')
+        .addOptions(['-c:v h264', '-preset:v ultrafast'])
         .complexFilter([{
             filter: 'overlay',
             options: 'x=W-w-10:y=h'
