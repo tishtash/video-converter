@@ -18,7 +18,7 @@ new ffmpeg(firstVideo)
         end = new Date();
         console.log('\x1b[34m', '\nTotal time taken to merge: ', timeConvert(start, end));
         console.log('\x1b[34m','\n********************COMPLETED**********************');
-        watermarkAddition();
+        watermarkAddition.init();
     })
     .on('progress', (progress) => {
         console.log('\x1b[32m', '\nProcessing: ' + progress.targetSize + ' KB converted');
