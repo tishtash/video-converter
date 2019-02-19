@@ -25,7 +25,7 @@ new ffmpeg(firstVideo)
         console.log('\x1b[32m', '\nPercentage complete: ' + Math.round(progress.percent) + ' %');
     })
     .on('error', (err) => {
-        console.err('\x1b[31m', '\Error occured: ', err);
+        console.error('\x1b[31m', '\Error occured: ', err);
     })
     .mergeToFile('./videos/temp.mp4')
 

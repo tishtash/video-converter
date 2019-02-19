@@ -25,7 +25,7 @@ module.exports.init = function() {
                 fs.unlinkSync('./videos/temp.mp4');
                 console.log('\x1b[32m', 'Successfully deleted temp files');
             } catch (err) {
-                console.err('\x1b[31m', 'Unable to do the clean up.')
+                console.error('\x1b[31m', 'Unable to do the clean up.')
             }
             endTime = new Date();
             console.log('\x1b[34m','\n********************COMPLETED**********************');
