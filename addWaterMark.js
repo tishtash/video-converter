@@ -4,9 +4,9 @@ const fs = require('fs');
 let startTime;
 let endTime;
 
-module.exports.init = function() {
+module.exports.init = function (path, saveToFolder) {
     new ffmpeg()
-        .input('./videos/temp.mp4')
+        .input(path)
         .input('./watermark/logo.png')
         .addOptions(['-c:v h264', '-preset:v ultrafast'])
         .complexFilter([{
@@ -23,13 +23,13 @@ module.exports.init = function() {
             // console.log('Process Completed', ffmpegData);
             try {
                 console.log('\x1b[34m', '\nDeleting Temporary files......');
-                fs.unlinkSync('./videos/temp.mp4');
+                fs.unlinkSync(path);
                 console.log('\x1b[32m', 'Successfully deleted temp files');
             } catch (err) {
                 console.error('\x1b[31m', 'Unable to do the clean up.')
             }
             endTime = new Date();
-            console.log('\x1b[34m','\n********************COMPLETED**********************');
+            console.log('\x1b[34m', '\n********************COMPLETED**********************');
             console.log('\x1b[34m', '\nTotal time taken: ', timeConvert(startTime, endTime));
             console.log('\x1b[34m', '\n******************************************');
         })
@@ -40,7 +40,7 @@ module.exports.init = function() {
         .on('error', (err) => {
             console.log('\x1b[31m', '\Error occured: ', err);
         })
-        .save('./videos/converted.mp4')
+        .save('./videos' + saveToFolder + '/converted.mp4')
 }
 
 timeConvert = (start, end) => {

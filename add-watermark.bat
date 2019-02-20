@@ -1,3 +1,5 @@
-@echo off 
-npm run watermark
-pause
+PAUSE
+ECHO 'PROCESSING STARTED'
+call npm run watermark
+ECHO 'PROCESSING COMPLETED'
+PAUSE

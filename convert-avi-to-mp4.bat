@@ -1,3 +1,5 @@
-@echo off 
-npm run combo
-pause
+PAUSE
+ECHO 'PROCESSING STARTED'
+call npm run combo
+ECHO 'PROCESSING COMPLETED'
+PAUSE
