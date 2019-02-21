@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "combo": "node index.js",
-    "watermark": "node -e 'require(\"./addWaterMark\").init('./videos/AVI/temp.mp4, '/avi')'"
+    "start": "node index.js",
+    "watermark": "node ./lib/addWaterMark-sc.js",
+    "mp4": "node ./lib/mergeMp4Files.js"
   },
-  "author": "",
+  "author": "Nitish Duggal",
   "license": "ISC",
   "dependencies": {
     "fluent-ffmpeg": "^2.1.2"
