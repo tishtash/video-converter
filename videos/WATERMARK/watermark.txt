@@ -1,0 +1,1 @@
+Place videos with '.mp4' extensions here to add watermark.
