@@ -1,5 +1,5 @@
 PAUSE
 ECHO 'PROCESSING STARTED'
-call npm run combo
+call npm run start
 ECHO 'PROCESSING COMPLETED'
 PAUSE
