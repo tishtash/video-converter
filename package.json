@@ -5,13 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
+    "convert-and-merge-avi-to-mp4": "node index.js",
     "watermark": "node ./lib/addWaterMark-sc.js",
-    "mp4": "node ./lib/mergeMp4Files.js"
+    "mp4": "node -e 'require(\"./lib/mergeMp4Files\").init(\"./videos/MP4\", false)'",
+    "convert-avi-to-mp4": "node ./lib/convertAviToMp4"
   },
   "author": "Nitish Duggal",
   "license": "ISC",
   "dependencies": {
-    "fluent-ffmpeg": "^2.1.2"
+    "fluent-ffmpeg": "^2.1.2",
+    "fs-extra": "^7.0.1",
+    "moment": "^2.24.0"
   }
 }

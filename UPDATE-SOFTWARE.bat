@@ -1,8 +1,7 @@
 PAUSE
 ECHO 'STARTING UPDATE....'
 choco install git.install
-rmdir /S /Q .
-cd ..
-git clone https://github.com/tishtash/video-converter.git video-converter-master
+start cmd.exe /k git clone https://github.com/tishtash/video-converter.git temp
+mv temp/.git video-converter-master/.git
 ECHO 'PROCESSING COMPLETED'
 PAUSE
