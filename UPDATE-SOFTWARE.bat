@@ -1,7 +1,6 @@
 PAUSE
 ECHO 'STARTING UPDATE....'
 choco install git.install
-start cmd.exe /k git clone https://github.com/tishtash/video-converter.git temp
-mv temp/.git video-converter-master/.git
+start cmd.exe /c "git clone https://github.com/tishtash/video-converter.git temp && ROBOCOPY /E /MOVE temp ."
 ECHO 'PROCESSING COMPLETED'
 PAUSE
