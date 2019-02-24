@@ -49,10 +49,21 @@ const constructlist = async () => {
 const executeCommand = async (fileObj) => {
     let aviStart;
     let aviEnd;
+    const duration = await getDuration(fileObj);
     return new Promise((resolve, reject) => {
         new ffmpeg(fileObj.filePath)
             .addOptions(['-preset:v ultrafast'])
+            .videoFilters([{
+                    filter: 'fade',
+                    options: 'in:st=0:d=1'
+                },
+                {
+                    filter: 'fade',
+                    options: 'out:st=' + (+duration - 0.5) + ':d=1'
+                }
+            ])
             .on('start', (command) => {
+                // -filter:v "fade=in:st=0:d=1, fade=out:st=59:d=1" -filter:a "afade=in:st=0:d=1, afade=out:st=59:d=1"
                 aviStart = moment(new Date());
                 console.log('\x1b[34m', 'Executing FFMPEG command.....', command);
             })
@@ -86,6 +97,14 @@ const executeCommand = async (fileObj) => {
                 });
             })
             .save(pathToVideos + '/output/temp/' + fileObj.fileName + '.mp4')
+    })
+}
+
+const getDuration = async (fileObj) => {
+    return new Promise((resolve, reject) => {
+        ffmpeg.ffprobe(fileObj.filePath, (err, metaData) => {
+            resolve(Math.round(metaData.format.duration).toFixed(2));
+        })
     })
 }
 
