@@ -8,6 +8,7 @@ const mergeMp4 = require('./lib/mergeMp4Files');
 const ext = '.avi';
 const pathToVideos = './videos/AVI';
 let listOfVideos = [];
+let processStartTime;
 
 
 const constructlist = async () => {
@@ -38,9 +39,6 @@ const constructlist = async () => {
                     }
                 }
             }
-            // ffmpeg.ffprobe(listOfVideos[0], (err, metaData) => {
-            //     // console.log('metaData', metaData);
-            // })
             return resolve(listOfVideos);
         });
     });
@@ -54,17 +52,12 @@ const executeCommand = async (fileObj) => {
         new ffmpeg(fileObj.filePath)
             .addOptions(['-preset:v veryfast'])
             .videoFilters([{
-                    filter: 'fade',
-                    options: 'in:st=0:d=1'
-                },
-                {
-                    filter: 'fade',
-                    options: 'out:st=' + (+duration - 0.5) + ':d=1'
-                }
-            ])
+                filter: 'fade',
+                options: `t=out:st=${duration - 1}:d=0.5`
+            }])
             .on('start', (command) => {
-                // -filter:v "fade=in:st=0:d=1, fade=out:st=59:d=1" -filter:a "afade=in:st=0:d=1, afade=out:st=59:d=1"
                 aviStart = moment(new Date());
+                processStartTime = processStartTime || aviStart;
                 console.log('\x1b[34m', 'Executing FFMPEG command.....', command);
             })
             .on('progress', (progress) => {
@@ -80,7 +73,6 @@ const executeCommand = async (fileObj) => {
                 });
             })
             .on('end', (proc, ffmpegData) => {
-                // console.log('Process Completed', ffmpegData);
                 aviEnd = moment(new Date());
                 console.log('\x1b[34m', '\nTotal time taken to convert to MP4: ', timeConvert(aviStart, aviEnd));
                 console.log('\x1b[34m', '\n********************COMPLETED**********************');
@@ -124,7 +116,7 @@ const triggerCommandForEachFile = async () => {
 const init = async () => {
     const processingComplete = await triggerCommandForEachFile();
     if (processingComplete.err) {
-        mergeMp4.init('./videos/AVI/output/temp', true);
+        mergeMp4.init('./videos/AVI/output/temp', true, processStartTime);
     } else {
         console.log(processingComplete.stack)
     }
