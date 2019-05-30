@@ -8,6 +8,7 @@
     "convert-and-merge-avi-to-mp4": "node index.js",
     "watermark": "node -e require('./lib/addWaterMark-sc').init()",
     "mp4": "node -e require('./lib/mergeMp4Files').init('./videos/MP4',false)",
+    "mp4-mac": "node -e 'require(\"./lib/mergeMp4Files\").init(\"./videos/MP4\",false)'",
     "convert-avi-to-mp4": "node ./lib/convertAviToMp4.js"
   },
   "author": "Nitish Duggal",
