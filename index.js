@@ -10,12 +10,6 @@ const pathToVideos = "./videos/AVI";
 let listOfVideos = [];
 let processStartTime;
 
-let codecMapper = {
-  audio: "a",
-  video: "v",
-  subtitle: "s"
-};
-
 const constructlist = async () => {
   return new Promise((resolve, reject) => {
     fs.readdir(pathToVideos, (err, files) => {
@@ -61,19 +55,14 @@ const executeCommand = async fileObj => {
   const duration = await getDuration(fileObj);
   return new Promise((resolve, reject) => {
     new ffmpeg(fileObj.filePath)
-      .inputOptions(["-analyzeduration 1000000", "-probesize 1000000"])
-      .outputOptions([
-        "-preset veryfast",
-        "-ignore_unknown",
-        "-max_muxing_queue_size 9999"
-      ])
-
-      //   .videoFilters([
-      //     {
-      //       filter: "fade",
-      //       options: `t=out:st=${duration - 1}:d=0.5`
-      //     }
-      //   ])
+      .inputOptions(["-analyzeduration 15m", "-probesize 1000000"])
+      .outputOptions(["-preset veryfast", "-max_muxing_queue_size 9999"])
+      // .videoFilters([
+      //   {
+      //     filter: "fade",
+      //     options: `t=out:st=${duration - 1}:d=0.5`
+      //   }
+      // ])
 
       .on("start", command => {
         aviStart = moment(new Date());
