@@ -16,6 +16,6 @@
   "dependencies": {
     "fluent-ffmpeg": "^2.1.2",
     "fs-extra": "^7.0.1",
-    "moment": "^2.24.0"
+    "moment": "^2.29.4"
   }
 }
